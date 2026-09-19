@@ -1,0 +1,31 @@
+name: Publish pinned Jetson short-install branch
+on:
+  push:
+    branches: [codex/prepare-jetson-short-install]
+    paths: [.github/workflows/publish-jetson-short-install.yml]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      SOURCE_SHA: 97629ae3bd9f501777d4282c9cef2032c28e4efd
+      TARGET_BRANCH: nrdr-OP-jetson-trt
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish only the new install branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git ls-remote --heads origin "refs/heads/$TARGET_BRANCH")"
+          git fetch --no-tags https://github.com/ryanafdahl/nrdr-OP-jetson-trt.git "$SOURCE_SHA"
+          test "$(git rev-parse FETCH_HEAD)" = "$SOURCE_SHA"
+          if git cat-file -e "$SOURCE_SHA:prebuilt" 2>/dev/null; then
+            echo "Unexpected prebuilt marker"; exit 1
+          fi
+          git show "$SOURCE_SHA:launch_chffrplus.sh" | grep -F './build.py || exit $?'
+          git push origin "$SOURCE_SHA:refs/heads/$TARGET_BRANCH"
+          test "$(git ls-remote --heads origin "refs/heads/$TARGET_BRANCH" | cut -f1)" = "$SOURCE_SHA"
+          echo "Install shorthand: ryanafdahl/$TARGET_BRANCH" >> "$GITHUB_STEP_SUMMARY"
+          echo "Source: $SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
