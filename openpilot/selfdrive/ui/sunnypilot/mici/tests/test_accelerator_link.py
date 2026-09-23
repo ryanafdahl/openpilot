@@ -278,8 +278,8 @@ class TestAcceleratorModelSelection:
 class TestAcceleratorLinkToggle:
   """The models panel's on / off control over the accelerator link.
 
-  On is the only enable, and the control is hidden on a device it means nothing
-  to: a plain comma must not grow a setting for hardware it will never see.
+  On is the only enable, and the control stays visible before first detection
+  so a fresh installation can opt into USB gadget setup from the UI.
   """
 
   PARAM = "JetlinkEnabled"
@@ -300,9 +300,9 @@ class TestAcceleratorLinkToggle:
     with self._accelerators(**accelerators):
       return link_toggle_meaningful()
 
-  def test_hidden_on_a_plain_device(self, params):
+  def test_shown_before_first_detection(self, params):
     params.remove(self.PARAM)
-    assert not self._meaningful()
+    assert self._meaningful()
 
   def test_shown_when_an_accelerator_is_attached(self, params):
     params.remove(self.PARAM)
@@ -322,9 +322,9 @@ class TestAcceleratorLinkToggle:
     params.put_bool(self.PARAM, True, block=True)
     assert self._meaningful()
 
-  def test_hidden_when_off_with_nothing_attached(self, params):
+  def test_shown_when_off_with_nothing_attached(self, params):
     params.put_bool(self.PARAM, False, block=True)
-    assert not self._meaningful()
+    assert self._meaningful()
 
   def test_absent_reads_as_off(self, params):
     from openpilot.selfdrive.ui.sunnypilot.mici.layouts.models import link_enabled
@@ -372,13 +372,13 @@ class TestAcceleratorLinkToggle:
     assert params.get(self.PARAM) is None
     assert not toggle._checked, "the pill must not show a state the param does not have"
 
-  def test_layout_hides_the_toggle_until_it_means_something(self, params):
+  def test_layout_shows_the_toggle_before_detection(self, params):
     from openpilot.selfdrive.ui.sunnypilot.mici.layouts.models import ModelsLayoutMici
 
     params.remove(self.PARAM)
     with self._accelerators():
       layout = ModelsLayoutMici()
-      assert not layout.link_toggle.is_visible
+      assert layout.link_toggle.is_visible
       assert layout.link_toggle in layout._scroller.items
     with self._accelerators(present=True):
       layout = ModelsLayoutMici()

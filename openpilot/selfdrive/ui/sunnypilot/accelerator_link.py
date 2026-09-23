@@ -31,10 +31,13 @@ def set_link_enabled(enabled: bool) -> None:
 
 
 def link_toggle_meaningful() -> bool:
-  """hidden on a plain device. ready() counts so a cached engine can be turned off
-  while the hardware is out of the car"""
-  return (accelerators.present() or accelerators.ready() or link_enabled()
-          or accelerators.unavailable_reason() is not None)
+  """Always expose the opt-in control, including before first detection.
+
+  USB gadget setup only runs after JetlinkEnabled is set. Hiding this control
+  until the accelerator is present therefore makes a fresh installation
+  impossible to enable from the UI.
+  """
+  return True
 
 
 def selected_accelerator_model() -> str:
