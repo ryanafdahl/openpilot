@@ -10,7 +10,12 @@ set -u
 BASEDIR="$(cd "$(dirname "$0")/../../../.." && pwd)"
 STATUS=/dev/shm/jetlink-gadget
 
-enabled=$(PYTHONPATH="$BASEDIR" python3 - <<'PY' 2>/dev/null || echo 0
+# The launcher has not activated openpilot's virtualenv yet. AGNOS's system
+# python lacks runtime dependencies (notably pyzmq), so it cannot import Params.
+PYTHON=${OPENPILOT_PYTHON:-/usr/local/venv/bin/python}
+[ -x "$PYTHON" ] || PYTHON=python3
+
+enabled=$(PYTHONPATH="$BASEDIR" "$PYTHON" - <<'PY' 2>/dev/null || echo 0
 try:
   from openpilot.common.params import Params
   print(1 if Params().get_bool("JetlinkEnabled") else 0)
