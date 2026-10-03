@@ -1,3 +1,17 @@
+# Clarity Pilot
+
+Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with either a Jetson Orin Nano Super or Pixel 11 Pro XL running JetLink 0.8.0 / protocol v3.
+
+- [Source repository, device setup, and validation notes](https://github.com/ryanafdahl/Clarity-Pilot)
+- [Pixel APK, checksum, and Android installation](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/android)
+- [Build log and archive](https://t3st.site)
+
+This is the device deployment repository. Install its `Clarity-Pilot` branch with `installer.comma.ai/ryanafdahl/Clarity-Pilot`. The source of record is `ryanafdahl/Clarity-Pilot`, branch `main`; the installer resolves to `ryanafdahl/openpilot`, branch `Clarity-Pilot`.
+
+Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The Pixel APK is installed, but its model preparation, benchmark, output parity, and direct-USB validation remain pending. Upstream sunnypilot changes through `a5f44653d7f43ad57fef2f546f3916ec4cbf3c56` are included, with custom JetLink controls and fallback preserved.
+
+## Upstream project
+
 ![](https://user-images.githubusercontent.com/47793918/233812617-beab2e71-57b9-479e-8bff-c3931347ca40.png)
 
 ## 🌞 What is sunnypilot?
