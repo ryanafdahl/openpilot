@@ -149,6 +149,8 @@ inline static std::unordered_map<std::string, ParamKeyAttributes> keys = {
     // jetlink backend. Readiness must survive a reboot, or every ignition cycle
     // would rebuild a multi-minute TensorRT engine.
     {"JetlinkEnabled", {PERSISTENT | BACKUP, BOOL}},
+    {"JetlinkLink", {PERSISTENT | BACKUP, INT, "0"}},
+    {"JetlinkModelPointers", {PERSISTENT, JSON}},
     {"JetlinkEndpoint", {PERSISTENT | BACKUP, STRING}},
     {"JetlinkModel", {PERSISTENT | BACKUP, STRING}},
     {"JetlinkEngineReady", {PERSISTENT, STRING}},
@@ -220,6 +222,7 @@ inline static std::unordered_map<std::string, ParamKeyAttributes> keys = {
     {"ModelManager_ClearCache", {CLEAR_ON_MANAGER_START, BOOL}},
     {"ModelManager_DownloadRef", {CLEAR_ON_MANAGER_START | CLEAR_ON_ONROAD_TRANSITION, STRING}},
     {"ModelManager_Favs", {PERSISTENT | BACKUP, STRING}},
+    {"ModelManager_InitialSmallModelSelected", {PERSISTENT, BOOL}},
     {"ModelManager_LastSyncTime", {CLEAR_ON_MANAGER_START | CLEAR_ON_OFFROAD_TRANSITION, INT, "0"}},
     {"ModelManager_LastSyncTime_Chestnut", {CLEAR_ON_MANAGER_START | CLEAR_ON_OFFROAD_TRANSITION, INT, "0"}},
     {"ModelManager_ModelsCache", {PERSISTENT | BACKUP, JSON}},
