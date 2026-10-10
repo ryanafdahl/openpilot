@@ -12,7 +12,9 @@ Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The P
 
 ## October 10 reinstall build
 
-This installation branch includes JetLink 0.8.5 and the **Clarity Pilot** home-screen branding. The installed comma build, integration tests, endpoint compatibility check and reboot checks passed. CD210 and Cinque Terre V2 were preserved on the maintained device; a fresh installation still needs normal setup and model selection. Direct USB and supervised vehicle validation remain pending for this update.
+This installation branch includes JetLink 0.8.5 and the **Clarity Pilot** home-screen branding. The installed comma build, integration tests, endpoint compatibility check and reboot checks passed. CD210 and Cinque Terre V2 were preserved on the maintained device; a fresh installation still needs normal setup and model selection.
+
+The subsequent [October 10 USB drive review](https://github.com/ryanafdahl/Clarity-Pilot/blob/main/docs/JETLINK_DRIVE_2026-10-10.md) parsed 47 full-rate segments from two sessions: **53,609 large-model outputs**, consecutive within each session, with no fallback after joining. Mean reported execution was **22.55 ms** across those outputs. The report documents startup retries, a shutdown-only controls-mismatch event, GPS backup warnings and missing paired Jetson journals. These sessions provide initial USB evidence; intermittent failure recovery and longer-term reliability remain unqualified.
 
 [Exact pins, validation, device backups and reinstall guidance](https://github.com/ryanafdahl/Clarity-Pilot/blob/main/docs/JETLINK_UPDATE_2026-10-10.md). The source repository and this installation branch are both updated; their Git histories remain separate.
 
