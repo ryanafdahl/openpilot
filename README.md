@@ -1,6 +1,6 @@
 # Clarity Pilot
 
-Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with either a Jetson Orin Nano Super or Pixel 11 Pro XL running JetLink 0.8.0 / protocol v3.
+Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with a Jetson Orin Nano Super running JetLink 0.8.5 / protocol v3, or a separately maintained experimental Pixel 11 Pro XL backend.
 
 - [Source repository, device setup, and validation notes](https://github.com/ryanafdahl/Clarity-Pilot)
 - [Pixel APK, checksum, and Android installation](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/android)
@@ -8,7 +8,13 @@ Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with eith
 
 This is the device deployment repository. Install its `Clarity-Pilot` branch with `installer.comma.ai/ryanafdahl/Clarity-Pilot`. The source of record is `ryanafdahl/Clarity-Pilot`, branch `main`; the installer resolves to `ryanafdahl/openpilot`, branch `Clarity-Pilot`.
 
-Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The Pixel APK is installed, but its model preparation, benchmark, output parity, and direct-USB validation remain pending. Upstream sunnypilot changes through `a5f44653d7f43ad57fef2f546f3916ec4cbf3c56` are included, with custom JetLink controls and fallback preserved.
+Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The Pixel APK retains its parked-only restrictions; its prior parity and desk results do not qualify it for driving. Upstream sunnypilot changes through `a5f44653d7f43ad57fef2f546f3916ec4cbf3c56` are included, with custom JetLink controls and fallback preserved.
+
+## October 10 reinstall build
+
+This installation branch includes JetLink 0.8.5 and the **Clarity Pilot** home-screen branding. The installed comma build, integration tests, endpoint compatibility check and reboot checks passed. CD210 and Cinque Terre V2 were preserved on the maintained device; a fresh installation still needs normal setup and model selection. Direct USB and supervised vehicle validation remain pending for this update.
+
+[Exact pins, validation, device backups and reinstall guidance](https://github.com/ryanafdahl/Clarity-Pilot/blob/main/docs/JETLINK_UPDATE_2026-10-10.md). The source repository and this installation branch are both updated; their Git histories remain separate.
 
 ## Upstream project
 
