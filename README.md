@@ -18,6 +18,8 @@ The subsequent [October 10 USB drive review](https://github.com/ryanafdahl/Clari
 
 [Exact pins, validation, device backups and reinstall guidance](https://github.com/ryanafdahl/Clarity-Pilot/blob/main/docs/JETLINK_UPDATE_2026-10-10.md). The source repository and this installation branch are both updated; their Git histories remain separate.
 
+The [nightly assisted-mileage tracker](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/tools/assisted_mileage) is a separate offroad maintenance job under `/data/maintenance/ai-mileage`, outside this driving checkout. Back up its private `ledger.json` and `baseline.json` before wiping `/data`; reinstall its systemd units after an AGNOS image replacement. Its public totals combine the owner's reported comma 4 / comma 3 history with new logged assistance and appear on [t3st.site](https://t3st.site/mileage.html).
+
 ## Upstream project
 
 ![](https://user-images.githubusercontent.com/47793918/233812617-beab2e71-57b9-479e-8bff-c3931347ca40.png)
