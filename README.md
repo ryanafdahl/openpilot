@@ -1,6 +1,6 @@
 # Clarity Pilot
 
-Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with a Jetson Orin Nano Super running JetLink 0.8.5 / protocol v3, or a separately maintained experimental Pixel 11 Pro XL backend.
+Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with a Jetson Orin Nano Super running JetLink 0.8.7 / protocol v3 (the comma client remains pinned to compatible v0.8.5 / adapter API 2), or a separately maintained experimental Pixel 11 Pro XL backend.
 
 - [Source repository, device setup, and validation notes](https://github.com/ryanafdahl/Clarity-Pilot)
 - [Pixel APK, checksum, and Android installation](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/android)
@@ -8,9 +8,13 @@ Clarity Pilot is a personal, experimental sunnypilot build for comma 4 with a Je
 
 This is the device deployment repository. Install its `Clarity-Pilot` branch with `installer.comma.ai/ryanafdahl/Clarity-Pilot`. The source of record is `ryanafdahl/Clarity-Pilot`, branch `main`; the installer resolves to `ryanafdahl/openpilot`, branch `Clarity-Pilot`.
 
-Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The Pixel APK retains its parked-only restrictions; its prior parity and desk results do not qualify it for driving. Upstream sunnypilot changes through `a5f44653d7f43ad57fef2f546f3916ec4cbf3c56` are included, with custom JetLink controls and fallback preserved.
+Cinque Terre Model V2 is selected on the comma and prepared on the Jetson. The separately maintained Pixel .9 APK accepts normal Tensor connections; its remaining USB and wake-stall limitations are documented in the source repository. The October 17 maintenance did not change the Pixel. Upstream sunnypilot changes through `a5f44653d7f43ad57fef2f546f3916ec4cbf3c56` are included, with custom JetLink controls and fallback preserved.
 
-## October 10 reinstall build
+## October 17 maintenance
+
+The comma driving code matches the current source repository. This branch now includes the [consolidated USB recovery bundle](patches/jetlink-usb-current/README.md) matching all eight locally patched files on the maintained comma. After a fresh reinstall, apply that bundle explicitly with ignition off and the offroad UI running; it verifies hashes and saves rollback sources. The Jetson was updated to 0.8.7 and 32 compatible Ubuntu security packages, retaining TensorRT and the V2 engine. [Full analysis and verification](docs/DEVICE_MAINTENANCE_2026-10-17.md).
+
+## October 10 driving baseline
 
 This installation branch includes JetLink 0.8.5 and the **Clarity Pilot** home-screen branding. The installed comma build, integration tests, endpoint compatibility check and reboot checks passed. CD210 and Cinque Terre V2 were preserved on the maintained device; a fresh installation still needs normal setup and model selection.
 
@@ -18,7 +22,7 @@ The subsequent [October 10 USB drive review](https://github.com/ryanafdahl/Clari
 
 [Exact pins, validation, device backups and reinstall guidance](https://github.com/ryanafdahl/Clarity-Pilot/blob/main/docs/JETLINK_UPDATE_2026-10-10.md). The source repository and this installation branch are both updated; their Git histories remain separate.
 
-The [nightly assisted-mileage tracker](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/tools/assisted_mileage) is a separate offroad maintenance job under `/data/maintenance/ai-mileage`, outside this driving checkout. Back up its private `ledger.json` and `baseline.json` before wiping `/data`; reinstall its systemd units after an AGNOS image replacement. Its public totals combine the owner's reported comma 4 / comma 3 history with new logged assistance and appear on [t3st.site](https://t3st.site/mileage.html).
+The [nightly assisted-mileage tracker](https://github.com/ryanafdahl/Clarity-Pilot/tree/main/tools/assisted_mileage) is a separate offroad maintenance job under `/data/maintenance/ai-mileage`, outside this driving checkout. Back up its private `ledger.json` and `baseline.json` before wiping `/data`; reinstall its systemd units after an AGNOS image replacement. Its public lifetime totals come from verified comma Connect data; logged assistance and big-model mileage are tracked separately and appear on [t3st.site](https://t3st.site/mileage.html).
 
 ## Upstream project
 
